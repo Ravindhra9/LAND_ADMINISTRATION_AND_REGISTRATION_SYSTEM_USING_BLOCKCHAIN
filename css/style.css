@@ -1,0 +1,158 @@
+body
+{
+  background-color:#f4f4f4;
+  color:black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6em;
+  margin:0;
+}
+
+.container
+{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#main-header
+{
+    overflow: hidden;
+    background-color:rgb(255, 249, 249);
+    text-align: left;
+    color: rgb(14, 9, 9);
+    padding:0;
+
+}
+
+#navbar{
+    background-color:#114f8d;
+    
+}
+
+#navbar ul{
+	padding:0;
+	list-style: none;
+}
+
+#navbar li{
+	float : left
+}
+
+
+#navbar a{
+	color:white;
+	text-decoration: none;
+	font-size:18px;
+    padding:14px 25px;
+    display: inline-block;
+}
+#navbar a:hover{
+    background-color:lightskyblue;
+    border-radius: 5px;
+    
+}
+.main-dropdown 
+{
+    background-color: #114f8d;
+    position: absolute;
+    display: none;
+    
+}
+.main-dropdown a
+{
+    display: block;
+}
+.dropdown:hover .main-dropdown
+{
+    display: block;
+}
+
+#Showcase
+{
+    background-image: url('../images/Green.jpg');
+    background-position: center;
+    min-height: 300px; 
+    text-align: center;
+}
+
+#Showcase h1{
+    color:rgb(254, 255, 254);
+    font-size: 50px;
+    padding-top: 30px;
+    line-height:1.6em
+}
+
+#main{
+    float:left;
+    height: 230px;
+    width:67%;
+    padding: 15px;
+    border:2px rgb(187, 180, 180) solid;
+    border-radius:15px;
+    box-sizing: border-box;
+    background-color: white;
+}
+#sidebar
+{
+    float:right;
+    height:230px;
+    width:32%;
+    padding:15px;
+    border:2px rgb(187, 180, 180) solid;
+    border-radius:15px;
+    box-sizing: border-box;
+    background-color: white;
+}
+#main-section
+{
+    padding: 30px; 
+    padding-bottom: 10px;
+}
+#main-section .main-form
+{
+    width: 400px;
+    margin: 0 auto;
+    border:2px #ccc solid;
+    border-radius:5px; 
+    padding:20px;
+    background-color: white;
+}
+#main-section .main-form label
+{
+    display: block;
+    color: black;
+    font-size: 18px;
+}
+#main-section .main-form input[type="text"],input[type="email"]
+{
+    padding:10px;
+    width: 85%;
+    border-block-end-color: rgb(199, 196, 196);
+    border-block-start-color: rgb(212, 209, 209);
+    border-radius: 5px;
+}
+#main-section .main-form input[type="submit"]
+{
+  width: 19%;
+  padding: 6px;
+  font-size: 20px;
+  cursor: pointer;
+}
+#main-footer
+{
+    background-color: #114f8d;
+    color:white;
+    text-align: center;
+    font-size:18px;
+    padding:10px;
+    margin-top: 30px;   
+}
+
+
+
+
+
+
+
+

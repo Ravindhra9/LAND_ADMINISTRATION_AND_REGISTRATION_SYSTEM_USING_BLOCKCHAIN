@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome to my project
+        </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/land_details.js"></script>
+        <script src="contact/node_modules/web3"></script>
+
+        <style>
+            body{
+                background-color:rgb(201, 192, 192);
+                color:white;
+                font-family: Arial, Helvetica, sans-serif; 
+                padding: 0%;
+                margin:0;
+            }
+            #main-header
+            {
+                background-color: #3b5998;
+                padding :9px;
+                margin:0
+            }
+            #main-section
+            {
+                width:400px;
+                height: 400px;
+                text-align: center;
+                padding : 10px 150px;
+                background-color: white;
+            }
+            #main-section .myform
+            {
+                padding : 50px;
+            }
+            #main-section .form-group input
+            {
+                padding:15px;
+                margin:10px;
+                border-color: #3b5998;
+                border-radius: 5px;
+                font-size: 15px;
+                width: 300px;
+            }
+            #main-section input[type=submit]
+            {
+                cursor: pointer;
+                color: white;
+                width: 30%;
+                padding: 8px;
+                background-color:#3b5998;
+            }
+            #main-footer
+            {
+                background-color: #114f8d;
+                color:white;
+                text-align: center;
+                font-size:18px;
+                padding:10px;
+                margin-top: 30px;   
+            }
+            h3{color: black;
+               padding-left:15px;}
+
+        </style>
+    </head>
+    <header id="main-header">
+        <div class=container>
+           <h1>Land Administration and title registration system</h1>
+        </div>
+    </header>
+    <br><br><br>
+    <center>
+    <section id="main-section">
+        <div class="myform">
+            <h3><strong>Login Form </strong></h3>
+            <form >
+                <div class="form-group">
+                    <input type="text" id="logid" required placeholder="LOGIN ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                     <input type="password" id="password" required placeholder="PASSWORD"> 
+                </div>
+                <br>
+                <hr>
+               <input type="submit" onclick="validate()"  id="submit" value="Log-In">
+               &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="register" value="Register">
+                <p><a href="#" style="text-decoration: none;color:#3b5998;">Forgotten password?</a></p>
+            </div>
+            </form>
+    </section>
+    </center>
+    <br><br>
+    <p id="demo" ></p>
+    <footer id="main-footer">
+        <p>Copyright &copy; 2019 my honours-project</p>
+    </footer>
+    <script>
+
+function validate(){
+var username = document.getElementById("logid").value;
+var password = document.getElementById("password").value;
+if ( username == "ravindra" && password == "ravindra#123"){
+
+      window.open("home.html"); 
+}
+else if(username != "" && password != ""){
+alert("Either Login-id or password are incorrect ");
+}
+}
+    </script>
+  </body>
+</html>

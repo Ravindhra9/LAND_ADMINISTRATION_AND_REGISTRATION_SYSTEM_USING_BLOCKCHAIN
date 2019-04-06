@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome to my project
+        </title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="js/land_details.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/web3.min.js"></script>
+
+        <style>
+            #instructor {
+                    padding:1em;
+                    background-color:#fff;
+                    margin: 1em 0;
+                    }
+        </style>
+    </head>
+    <header id="main-header">
+        <div class=container>
+           <h1>Land Administration and title registration system</h1>
+        </div>
+    </header>
+    <nav id="navbar">
+      <div class="container">
+        <ul>
+            <li><a href="home.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li class="dropdown">
+                    <a href="#"><i class="fa fa-university"></i> Land Administration</a>
+                    <div class="main-dropdown">
+                        <p><a href="NewLand.html"><i class="fa fa-search" aria-hidden="true"></i> Search LandDetails</a></p>
+                        <p><a href="Validity.html"><i class="fa fa-check-square"></i> Check validity of land</a></p>
+                    </div>
+                </li>
+            <li><a href="blockchain.html"><i class="fa fa-btc" aria-hidden="true"></i> BlockChain</a></li>
+            <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> LogOut</a></li>
+        </ul>
+      </div>
+    </nav>
+    <h2 id="instructor"></h2>
+    <section id="main-section">
+        <div class="main-form">
+            <form name="myform">
+                <div class="form-group" >
+                    <label for="propertid">PropertyID:</label>
+                    <input type="text" id="vproperytid" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <input type="submit" onclick="validateDetails()" id="submit" value="Submit">
+            </form>
+        </div>
+    </section>
+    <footer id="main-footer">
+        <p>Copyright &copy; 2019 my honours-project</p>
+    </footer>
+    <script>
+
+var person1 = {
+  Property_id: "ravi123",
+  Title_Deed: "ravi",
+  Land_Area_in_acre:5,
+  Email: "ravi@gmail.com",
+  Mobile_Number:3456,
+  Age : 23,
+  Gender:"Male",
+  Digital_Signiture:"password" 
+};
+
+var person2 = {
+  Property_id: "raj123",
+  Title_Deed: "raj",
+  Land_Area_in_acre:6,
+  Email: "raj@gmail.com",
+  Mobile_Number:3457,
+  Age : 24,
+  Gender:"Male",
+  Digital_Signiture:"password1" 
+};
+
+    if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+        }
+
+        web3.eth.defaultAccount = web3.eth.accounts[0];
+
+        var LandContract = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			},
+			{
+				"name": "_DS",
+				"type": "string"
+			}
+		],
+		"name": "setLandDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getLandDetails",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+
+
+var Land = LandContract.at('0x51ea5b4b828303904761885b7253866170a7cb9a');
+        console.log(Land);
+
+        var pid;
+        var ds;
+
+        Land.getLandDetails(function(error, result){
+            if(!error)
+                {
+                    
+                    pid=result[0];
+                    ds=result[1];
+                    console.log(result);
+                }
+            else
+                console.error(error);
+        });
+
+function validateDetails()
+{
+var Vproperty_id=document.getElementById("vproperytid").value;
+
+if(Vproperty_id==person1.Property_id)
+{
+  if(person1.Digital_Signiture==ds)//person1.Digital_Signiture==Blockchain.Digital_Signiture
+  {
+    alert("Your Land Details are valid");
+  }
+  else{
+    alert("Your Land Details are not valid");
+  }
+}
+else if(Vproperty_id==person2.Property_id)
+{
+  if(person2.Digital_Signiture==ds)//person2.Digital_Signiture==Blockchain.Digital_Signiture)
+  {
+    alert("Your Land Details are valid");
+  }
+  else{
+    alert("Your Land Details are not valid");
+  }
+}
+else if(Vproperty_id!="")
+{
+  alert("Please first search your land information in land records");
+}
+}
+    </script>
+  </body>
+</html>
