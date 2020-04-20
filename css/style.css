@@ -93,11 +93,32 @@ body
     box-sizing: border-box;
     background-color: white;
 }
+#main2{
+    float:left;
+    height: 850px;
+    width:50%;
+    padding: 15px;
+    border:2px rgb(187, 180, 180) solid;
+    border-radius:15px;
+    box-sizing: border-box;
+    background-color: white;
+}
 #sidebar
 {
     float:right;
     height:230px;
     width:32%;
+    padding:15px;
+    border:2px rgb(187, 180, 180) solid;
+    border-radius:15px;
+    box-sizing: border-box;
+    background-color: white;
+}
+#sidebar2
+{
+    float:right;
+    height:850px;
+    width:48%;
     padding:15px;
     border:2px rgb(187, 180, 180) solid;
     border-radius:15px;

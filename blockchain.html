@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/web3.min.js"></script>
-
+        <script src="bundle.js"></script>
         <style>
             #instructor {
                     padding:1em;
@@ -21,7 +21,7 @@
     <body>
     <header id="main-header">
         <div class=container>
-           <h1>Land Administration and title registration system</h1>
+           <h1>Land Administration and registration system</h1>
         </div>
     </header>
     <nav id="navbar">
@@ -31,7 +31,6 @@
             <li class="dropdown">
                     <a href="#"><i class="fa fa-university"></i> Land Administration</a>
                     <div class="main-dropdown">
-                        <p><a href="NewLand.html"><i class="fa fa-search" aria-hidden="true"></i> Search LandDetails</a></p>
                         <p><a href="Validity.html"><i class="fa fa-check-square"></i> Check validity of land</a></p>
                     </div>
                 </li>
@@ -39,22 +38,52 @@
             <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> LogOut</a></li>
         </ul>
       </div>
-    </nav>
-    <h2 id="instructor"></h2>
+	</nav>
+    
     <section id="main-section">
         <div class="main-form">
-            <form name="myform" >
+            <form name="sendtoblockchain" >
                 <div class="form-group">
                     <label for="input-propertyid">PropertyID</label>
-                    <input type="text" id="propertyid" required placeholder="Enter your property ID"> 
+                    <input type="text" id="propertyid" placeholder="Enter your property ID" required> 
                 </div>
                 <br>
                 <div class="form-group">
+                    <label for="input-propertyid">Owner Name</label>
+                    <input type="text" id="ownername" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="input-propertyid">State</label>
+                    <input type="text" id="state" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="input-propertyid">District</label>
+                    <input type="text" id="district" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="input-propertyid">Village</label>
+                    <input type="text" id="village" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="input-propertyid">Pincode</label>
+                    <input type="text" id="pincode" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="input-propertyid">UID</label>
+                    <input type="text" id="uid" required placeholder="Enter your property ID"> 
+                </div>
+                <br>
+                <!-- <div class="form-group">
                      <label for="Digital_sign">Digital Signiture</label>
                      <input type="text" id="digital_sign" required placeholder="Enter your Digital Signiture"> 
                 </div>
-                <br>
-                <input type="submit" id="submit" value="Submit">
+                <br> -->
+                <input type="button"  id="submit" value="submit">
             </form>
         </div>
     </section>
@@ -63,16 +92,16 @@
     </footer>
 
     <script>
-    if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-        }
+        if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+} else {
+    // set the provider you want from Web3.providers
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+}
 
-        web3.eth.defaultAccount = web3.eth.accounts[0];
+web3.eth.defaultAccount = web3.eth.accounts[0];
 
-        var LandContract = web3.eth.contract([
+var LandContract = web3.eth.contract([
 	{
 		"constant": false,
 		"inputs": [
@@ -81,11 +110,47 @@
 				"type": "string"
 			},
 			{
-				"name": "_DS",
+				"name": "_Signmsg",
 				"type": "string"
 			}
 		],
-		"name": "setLandDetails",
+		"name": "SetLandDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			},
+			{
+				"name": "_Signmsg",
+				"type": "string"
+			}
+		],
+		"name": "SetLandDetails1",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			},
+			{
+				"name": "_Signmsg",
+				"type": "string"
+			}
+		],
+		"name": "SetLandDetails2",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -93,13 +158,52 @@
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "getLandDetails",
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo",
 		"outputs": [
 			{
 				"name": "",
 				"type": "string"
-			},
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo2",
+		"outputs": [
 			{
 				"name": "",
 				"type": "string"
@@ -111,28 +215,47 @@
 	}
 ]);
 
-var Land = LandContract.at('0x51ea5b4b828303904761885b7253866170a7cb9a');
-        console.log(Land);
 
-        var pid;
-        var ds;
 
-        Land.getLandDetails(function(error, result){
-            if(!error)
-                {
-                    
-                    $("#instructor").html('You are authenticated ,'+'`'+result[0]+'`'+' is your property-ID and '+'`'+result[1]+'`'+' is your digital signature)');
-                    console.log(result);
-                }
-            else
-                console.error(error);
-        });
 
-        $("#submit").click(function() {
-            Land.setLandDetails($("#propertyid").val(), $("#digital_sign").val());
-        });
 
-            
+var Land = LandContract.at('0x51EA5b4b828303904761885b7253866170A7cb9a');
+
+document.getElementById('submit').onclick = function()
+{
+
+var pid=document.getElementById("propertyid").value;
+var ownername=document.getElementById("ownername").value;
+var state=document.getElementById("state").value;
+var village=document.getElementById("village").value;
+var district=document.getElementById("district").value;
+var uid=document.getElementById("uid").value;
+var pincode=document.getElementById("pincode").value;
+
+var msgds=getDigitalSign(pid,ownername,state,district,village,pincode,uid);
+
+console.log(msgds);
+
+var t0 = performance.now();
+
+Land.SetLandDetails(pid, msgds[0]);
+Land.SetLandDetails1(pid, msgds[1]);
+Land.SetLandDetails2(pid, msgds[2]);
+var t1 = performance.now();
+
+console.log("keep ds func took " + (t1 - t0) + " milliseconds.");
+
+// console.log(pid);
+
+// var result=Land.GetUserInfo.call(pid);
+// var result1=Land.GetUserInfo1.call(pid);
+// var result2=Land.GetUserInfo2.call(pid);
+// var ds=result.concat(result1,result2);
+
+alert("Your Land asset information securely stored into blockchain");
+
+
+}
 
     </script>
 

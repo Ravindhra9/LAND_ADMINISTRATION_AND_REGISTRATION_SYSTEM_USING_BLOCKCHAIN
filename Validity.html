@@ -6,9 +6,10 @@
         </title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="js/land_details.js"></script>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/web3.min.js"></script>
+        <script src="bundle.js"></script>
 
         <style>
             #instructor {
@@ -20,9 +21,9 @@
     </head>
     <header id="main-header">
         <div class=container>
-           <h1>Land Administration and title registration system</h1>
+           <h1>Land Administration and registration system</h1>
         </div>
-    </header>
+      </head>
     <nav id="navbar">
       <div class="container">
         <ul>
@@ -30,8 +31,7 @@
             <li class="dropdown">
                     <a href="#"><i class="fa fa-university"></i> Land Administration</a>
                     <div class="main-dropdown">
-                        <p><a href="NewLand.html"><i class="fa fa-search" aria-hidden="true"></i> Search LandDetails</a></p>
-                        <p><a href="Validity.html"><i class="fa fa-check-square"></i> Check validity of land</a></p>
+                        <p><a href="Validity.html"><i class="fa fa-check-square"></i> Verify Land OwnerShip</a></p>
                     </div>
                 </li>
             <li><a href="blockchain.html"><i class="fa fa-btc" aria-hidden="true"></i> BlockChain</a></li>
@@ -39,8 +39,66 @@
         </ul>
       </div>
     </nav>
-    <h2 id="instructor"></h2>
-    <section id="main-section">
+    <br>
+    <div class="container">
+      <section id="main2">
+        <section id="main-section">
+          <div class="main-form">
+              <form name="myform">
+                  <div class="form-group">
+                      <label for="input-propertyid">Public Key of Owner</label>
+                      <input type="text" id="publickey" required placeholder="Enter your property ID"> 
+                  </div>
+                  <br>
+                <div class="form-group">
+                  <label for="input-propertyid">PropertyID</label>
+                  <input type="text" id="propertyid" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">Owner Name</label>
+                  <input type="text" id="ownername" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">State</label>
+                  <input type="text" id="state" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">District</label>
+                  <input type="text" id="district" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">Village</label>
+                  <input type="text" id="village" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">Pincode</label>
+                  <input type="text" id="pincode" required placeholder="Enter your property ID"> 
+              </div>
+              <br>
+              <div class="form-group">
+                  <label for="input-propertyid">UID</label>
+                  <input type="text" id="uid" required placeholder="Enter your property ID"> 
+              </div>
+                  <br>
+                  <input type="button"  id="submit" value="submit">
+              </form>
+          </div>
+      </section>
+     </section>
+     <aside id="sidebar2">
+             <h1>Pubic Keys Of Land Owners</h1>
+             <p id="publickeys">
+              
+            </p>
+     </aside>
+     
+  </div>
+    <!-- <section id="main-section">
         <div class="main-form">
             <form name="myform">
                 <div class="form-group" >
@@ -51,39 +109,40 @@
                 <input type="submit" onclick="validateDetails()" id="submit" value="Submit">
             </form>
         </div>
-    </section>
+    </section> -->
     <footer id="main-footer">
         <p>Copyright &copy; 2019 my honours-project</p>
     </footer>
     <script>
 
-var person1 = {
-  Property_id: "ravi123",
-  Title_Deed: "ravi",
-  Land_Area_in_acre:5,
-  Email: "ravi@gmail.com",
-  Mobile_Number:3456,
-  Age : 23,
-  Gender:"Male",
-  Digital_Signiture:"password" 
-};
 
-var person2 = {
-  Property_id: "raj123",
-  Title_Deed: "raj",
-  Land_Area_in_acre:6,
-  Email: "raj@gmail.com",
-  Mobile_Number:3457,
-  Age : 24,
-  Gender:"Male",
-  Digital_Signiture:"password1" 
-};
+// var person1 = {
+//   Property_id: "ravi123",
+//   Title_Deed: "ravi",
+//   Land_Area_in_acre:5,
+//   Email: "ravi@gmail.com",
+//   Mobile_Number:3456,
+//   Age : 23,
+//   Gender:"Male",
+//   Digital_Signiture:"password" 
+// };
+
+// var person2 = {
+//   Property_id: "raj123",
+//   Title_Deed: "raj",
+//   Land_Area_in_acre:6,
+//   Email: "raj@gmail.com",
+//   Mobile_Number:3457,
+//   Age : 24,
+//   Gender:"Male",
+//   Digital_Signiture:"password1" 
+// };
 
     if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
             // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            web3 = new Web3(new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545"));
         }
 
         web3.eth.defaultAccount = web3.eth.accounts[0];
@@ -97,11 +156,47 @@ var person2 = {
 				"type": "string"
 			},
 			{
-				"name": "_DS",
+				"name": "_Signmsg",
 				"type": "string"
 			}
 		],
-		"name": "setLandDetails",
+		"name": "SetLandDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			},
+			{
+				"name": "_Signmsg",
+				"type": "string"
+			}
+		],
+		"name": "SetLandDetails1",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			},
+			{
+				"name": "_Signmsg",
+				"type": "string"
+			}
+		],
+		"name": "SetLandDetails2",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -109,13 +204,52 @@ var person2 = {
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "getLandDetails",
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo",
 		"outputs": [
 			{
 				"name": "",
 				"type": "string"
-			},
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_PID",
+				"type": "string"
+			}
+		],
+		"name": "GetUserInfo2",
+		"outputs": [
 			{
 				"name": "",
 				"type": "string"
@@ -128,53 +262,108 @@ var person2 = {
 ]);
 
 
-var Land = LandContract.at('0x51ea5b4b828303904761885b7253866170a7cb9a');
-        console.log(Land);
+var Land = LandContract.at('0x51EA5b4b828303904761885b7253866170A7cb9a');
+        
 
         var pid;
         var ds;
 
-        Land.getLandDetails(function(error, result){
-            if(!error)
-                {
+        // Land.getLandDetails(function(error, result){
+        //     if(!error)
+        //         {
                     
-                    pid=result[0];
-                    ds=result[1];
-                    console.log(result);
-                }
-            else
-                console.error(error);
-        });
+        //             pid=result[0];
+        //             ds=result[1];
+        //             console.log(result);
+        //         }
+        //     else
+        //         console.error(error);
+        // });
 
-function validateDetails()
+document.getElementById('submit').onclick = function()
 {
-var Vproperty_id=document.getElementById("vproperytid").value;
 
-if(Vproperty_id==person1.Property_id)
+var publickey=document.getElementById("publickey").value;
+var pid=document.getElementById("propertyid").value;
+var ownername=document.getElementById("ownername").value;
+var state=document.getElementById("state").value;
+var village=document.getElementById("village").value;
+var district=document.getElementById("district").value;
+var uid=document.getElementById("uid").value;
+var pincode=document.getElementById("pincode").value;
+
+var t0 = performance.now();
+
+var hash=getHash(pid,ownername,state,district,village,pincode,uid);
+
+var t1 = performance.now();
+console.log("convert to hash func took " + (t1 - t0) + " milliseconds.");
+
+
+var publickey=localStorage.getItem(pid);
+
+var t0 = performance.now();
+
+var result=Land.GetUserInfo.call(pid);
+var result1=Land.GetUserInfo1.call(pid);
+var result2=Land.GetUserInfo2.call(pid);
+var ds=result.concat(result1,result2);
+
+var t1 = performance.now();
+
+console.log("get ds func took " + (t1 - t0) + " milliseconds.");
+
+var t0 = performance.now();
+
+var verification=verify(hash,publickey,ds);
+
+var t1 = performance.now();
+console.log("verify func took " + (t1 - t0) + " milliseconds.");
+
+if(verification==true)
 {
-  if(person1.Digital_Signiture==ds)//person1.Digital_Signiture==Blockchain.Digital_Signiture
-  {
     alert("Your Land Details are valid");
-  }
-  else{
-    alert("Your Land Details are not valid");
-  }
 }
-else if(Vproperty_id==person2.Property_id)
+else{
+     alert("Your Land Details are not valid");
+ }
+
+// if(Vproperty_id==person1.Property_id)
+// {
+//   if(person1.Digital_Signiture==ds)//person1.Digital_Signiture==Blockchain.Digital_Signiture
+//   {
+//     alert("Your Land Details are valid");
+//   }
+//   else{
+//     alert("Your Land Details are not valid");
+//   }
+// }
+// else if(Vproperty_id==person2.Property_id)
+// {
+//   if(person2.Digital_Signiture==ds)//person2.Digital_Signiture==Blockchain.Digital_Signiture)
+//   {
+//     alert("Your Land Details are valid");
+//   }
+//   else{
+//     alert("Your Land Details are not valid");
+//   }
+// }
+// else if(Vproperty_id!="")
+// {
+//   alert("Please first search your land information in land records");
+// }
+
+
+}
+
+for(var i=0;i<localStorage.length;i++)
 {
-  if(person2.Digital_Signiture==ds)//person2.Digital_Signiture==Blockchain.Digital_Signiture)
-  {
-    alert("Your Land Details are valid");
-  }
-  else{
-    alert("Your Land Details are not valid");
-  }
+   console.log(localStorage.key(i));
+  $("#publickeys").append(localStorage.key(i)+" : "+localStorage.getItem(localStorage.key(i))+"\n");
 }
-else if(Vproperty_id!="")
-{
-  alert("Please first search your land information in land records");
-}
-}
+// $("#publickeys").html()
+// var keys=Object.entries(localStorage)
+// console.log(keys);
     </script>
   </body>
 </html>
